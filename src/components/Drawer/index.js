@@ -20,24 +20,22 @@ export default function Drawer({ onClose, onRemove, items = [], opened}) {
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post('https://645790fc0c15cb14820b9960.mockapi.io/orders',
-       {items: cartItems,});
-    setOrderId(data.id)
-    setIsCompleted(true);
-    setCartItems([]);
-
-    for (let i = 0; i < cartItems.length; i++){
-      const item = cartItems[i];
-      await axios.delete(
-        `https://644b652317e2663b9dee4ea4.mockapi.io/Cart/${item.id}`
-      );
-      await delay(1000);
-    }
-
+      const { data } = await axios.post('https://645790fc0c15cb14820b9960.mockapi.io/orders', { items: cartItems });
+      setOrderId(data.id);
+      setIsCompleted(true);
+      setCartItems([]);
+  
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete(`https://644b652317e2663b9dee4ea4.mockapi.io/Cart/${item.id}`);
+        await delay(1000);
+      }
     } catch (error) {
-      alert ('не удалось оформить заказ');
+      alert('Не удалось оформить заказ');
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
   
     return (

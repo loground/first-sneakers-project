@@ -7,7 +7,7 @@ function Favorites () {
     return (
       <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
-          <h1> Мои закладочки </h1>
+          <h1> Мне понравились: </h1>
         </div>
       
         <div className="d-flex flex-wrap">
